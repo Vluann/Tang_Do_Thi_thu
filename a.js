@@ -116,3 +116,10 @@ const server = http.createServer((req, res) => {
 server.listen(8080, () => {
     console.log('Server listening on port 8080');
 });
+const fs = require('fs');
+
+// Đọc tệp cookies.txt
+fs.readFile('cookies.txt', 'utf8', (err, data) => {
+    if (err) throw err;
+    console.log('Cookies:', data);
+});
